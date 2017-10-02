@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="Version.js"></script>
+    <title>Version</title>
+</head>
+<body>
+    <p>
+        <label for="input">Input version:</label>
+        <input  id="input" type="text"></input>
+    </p>
+
+    <p>
+        <input type="button" onclick="update();" value="Update" />
+    </p>
+
+    <p>
+        <label for="output">Version:</label>
+        <input id="output1" type="text" readonly="readonly"></input>
+    </p>
+
+    <p>
+        <label for="output">Next version:</label>
+        <input id="output2" type="text" readonly="readonly"></input>
+    </p>
+
+    <script type="text/javascript">
+    /*<![CDATA[*/
+    function update() {
+        var  inputNode  = document.getElementById('input' );
+        var outputNode1 = document.getElementById('output1');
+        var outputNode2 = document.getElementById('output2');
+
+        var v = new Version(inputNode.value);
+
+        outputNode1.value = v.toString();
+        v.nextVersion();
+        outputNode2.value = v.toString();
+    }
+    /*]]>*/
+    </script>
+</body>
+</html>
