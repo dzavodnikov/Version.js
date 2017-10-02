@@ -1,7 +1,7 @@
 /*
- * Version -- Library on a pure JavaScript that allowed to manipulate with semantic versions.
+ * Version -- Library on a pure JavaScript that allowed to manipulate with semantic versions (http://semver.org/).
  * 
- * Support all web-browsers).
+ * Support all web-browsers.
  *
  * Version 1.0.0.
  *
