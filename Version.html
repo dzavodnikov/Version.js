@@ -25,6 +25,25 @@
         <input id="output2" type="text" readonly="readonly"></input>
     </p>
 
+    <p>
+        <label for="compare1">Compare #1:</label>
+        <input id="compare1" type="text"></input>
+    </p>
+
+    <p>
+        <label for="compare2">Compare #2:</label>
+        <input id="compare2" type="text"></input>
+    </p>
+
+    <p>
+        <input type="button" onclick="compare();" value="Compare" />
+    </p>
+
+    <p>
+        <label for="compareResult">Compare result:</label>
+        <input id="compareResult" type="text" readonly="readonly"></input>
+    </p>
+
     <script type="text/javascript">
     /*<![CDATA[*/
     function update() {
@@ -37,6 +56,17 @@
         outputNode1.value = v.toString();
         v.nextVersion();
         outputNode2.value = v.toString();
+    }
+
+    function compare() {
+        var compare1Node      = document.getElementById('compare1' );
+        var compare2Node      = document.getElementById('compare2');
+        var compareResultNode = document.getElementById('compareResult');
+
+        var v1 = new Version(compare1Node.value);
+        var v2 = new Version(compare2Node.value);
+
+        compareResultNode.value = v1.compare(v2);
     }
     /*]]>*/
     </script>
