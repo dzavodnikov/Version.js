@@ -3,7 +3,7 @@
  * 
  * Support all web-browsers.
  *
- * Version 1.0.0.
+ * Version 1.0.1.
  *
  * Copyright (c) 2017 Dmitry Zavodnikov.
  *
@@ -16,7 +16,15 @@ function Version() {
     var self = this;
     var versionFragments = [];
 
-    var args = Array.from(arguments);
+    var i;
+    var val;
+    var args = [];
+
+    for (i = 0; i < arguments.length; ++i) {
+    	val = arguments[i];
+    	args.push(val);
+    }
+
     if (args.length === 0) {
         args[0] = DEFAULT_VERSION;
     }
@@ -27,8 +35,6 @@ function Version() {
         args = args[0].split('.');
     }
 
-    var i;
-    var val;
     for (i = 0; i < args.length; ++i) {
         val = args[i];
         if (typeof val !== 'string' && typeof val !== 'number') {
