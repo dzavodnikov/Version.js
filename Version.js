@@ -20,7 +20,7 @@ function Version() {
 
     arguments.forEach(function(element) {
         args.push(element);
-    }
+    });
 
     if (args.length === 0) {
         args[0] = DEFAULT_VERSION;
@@ -38,7 +38,7 @@ function Version() {
         }
 
         versionFragments.push(element);
-    }
+    });
 
     this.getVersionFragments = function() {
         return versionFragments;
