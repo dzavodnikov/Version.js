@@ -3,9 +3,9 @@
  * 
  * Support all web-browsers.
  *
- * Version 1.0.1.
+ * Version 2.0.0.
  *
- * Copyright (c) 2017 Dmitry Zavodnikov.
+ * Copyright (c) 2016-2019 Dmitry Zavodnikov.
  *
  * Licensed under the MIT License.
  */
@@ -14,15 +14,12 @@ function Version() {
     var DEFAULT_VERSION = '1.0.0';
 
     var self = this;
-    var versionFragments = [];
 
-    var i;
-    var val;
+    var versionFragments = [];
     var args = [];
 
-    for (i = 0; i < arguments.length; ++i) {
-    	val = arguments[i];
-    	args.push(val);
+    arguments.forEach(function(element) {
+        args.push(element);
     }
 
     if (args.length === 0) {
@@ -35,21 +32,20 @@ function Version() {
         args = args[0].split('.');
     }
 
-    for (i = 0; i < args.length; ++i) {
-        val = args[i];
-        if (typeof val !== 'string' && typeof val !== 'number') {
-            throw 'Illegal argument ' + val;
+    args.forEach(function(element) {
+        if (typeof element !== 'string' && typeof element !== 'number') {
+            throw 'Illegal argument ' + element;
         }
 
-        versionFragments.push(val);
+        versionFragments.push(element);
     }
 
     this.getVersionFragments = function() {
         return versionFragments;
     }
 
-    this.compare = function(version) {
-        var frags1 = self.getVersionFragments();
+    this.compareTo = function(version) {
+        var frags1 =    self.getVersionFragments();
         var frags2 = version.getVersionFragments();
         var i;
         for (i = 0; i < Math.min(frags1.length, frags2.length); ++i) {
@@ -71,10 +67,20 @@ function Version() {
         return 0;
     }
 
+    this.lessOrEqual = function(version) {
+        return compareTo(version) <= 0;
+    }
+
+    this.greater = function(version) {
+        return !lessOrEqual(version);
+    }
+
+    this.greaterOrEqual = function(version) {
+        return !less(version);
+    }
+
     this.nextVersion = function() {
-        var i;
-        var intVal;
-        var frags = self.getVersionFragments();
+        var i, intVal, frags = self.getVersionFragments();
         for (i = frags.length - 1; i >= 0; --i) {
             intVal = parseInt(frags[i]);
             if (!isNaN(intVal)) {
@@ -83,6 +89,17 @@ function Version() {
                 break;
             }
         }
+    }
+
+    this.findPrevious = function(versionList) {
+        var i, ver, result;
+        for (i = 0; i < versionList.length; ++i) {
+            ver = versionList[i];
+            if (ver.lessOrEqual(self)) {
+                result = ver;
+            }
+        }
+        return result;
     }
 
     this.toString = function() {
