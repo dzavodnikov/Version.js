@@ -18,7 +18,7 @@ function Version() {
     var versionFragments = [];
     var args = [];
 
-    arguments.forEach(function(element) {
+    [].forEach.call(arguments, function(element) {
         args.push(element);
     });
 
@@ -68,15 +68,19 @@ function Version() {
     }
 
     this.lessOrEqual = function(version) {
-        return compareTo(version) <= 0;
+        return self.compareTo(version) <= 0;
+    }
+
+    this.less = function(version) {
+        return self.compareTo(version) < 0;
     }
 
     this.greater = function(version) {
-        return !lessOrEqual(version);
+        return !self.lessOrEqual(version);
     }
 
     this.greaterOrEqual = function(version) {
-        return !less(version);
+        return !self.less(version);
     }
 
     this.nextVersion = function() {
